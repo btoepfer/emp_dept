@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
-  before_action :set_department, only: [:index, :show, :update, :destroy]
-  before_action :set_employee, only: [:show, :update, :destroy]
+  before_action :set_department, only: [:index, :show, :update]
+  before_action :set_employee, only: [:show, :update]
 
 
   # GET /employees
@@ -37,6 +37,7 @@ class EmployeesController < ApplicationController
 
   # DELETE /employees/1
   def destroy
+    @employee = Employee.find(params[:id])
     @employee.destroy
   end
 
