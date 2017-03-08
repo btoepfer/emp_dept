@@ -2,6 +2,7 @@ class EmployeesController < ApplicationController
   before_action :set_department, only: [:index, :show, :update, :destroy]
   before_action :set_employee, only: [:show, :update, :destroy]
 
+
   # GET /employees
   def index
     @employees = @department.employees.all
@@ -18,8 +19,9 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.new(employee_params)
     if @employee.save
-      render jsonapi: @employee, status: :created
+      render jsonapi: @employee, status: :created, message: "Employee sucessfully created."
     else
+      logger.debug("Error #{@employee.errors}")
       render jsonapi: @employee.errors, status: :unprocessable_entity
     end
   end
@@ -60,4 +62,5 @@ class EmployeesController < ApplicationController
       # params.require(:employee).permit(:empno, :ename, :job, :hiredate, :sal, :deptno)
       # params.fetch(:employee, {})
     end
+
 end
