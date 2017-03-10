@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   end
   post "employees" => 'employees#create'
   delete "employees/:id" => 'employees#destroy'
+  patch "employees/:id" => 'employees#update'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

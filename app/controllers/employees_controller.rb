@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
-  before_action :set_department, only: [:index, :show, :update]
-  before_action :set_employee, only: [:show, :update]
+  before_action :set_department, only: [:index, :show]
+  before_action :set_employee, only: [:show]
 
 
   # GET /employees
@@ -28,6 +28,7 @@ class EmployeesController < ApplicationController
 
   # PATCH/PUT /employees/1
   def update
+    @employee = Employee.find(params[:id])
     if @employee.update(employee_params)
       render jsonapi: @employee
     else
