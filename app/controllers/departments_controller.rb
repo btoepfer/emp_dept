@@ -3,6 +3,7 @@ class DepartmentsController < ApplicationController
 
   # GET /departments
   def index
+    # @departments = Department.includes(:employees).all
     @departments = Department.all
     render jsonapi: @departments 
   end

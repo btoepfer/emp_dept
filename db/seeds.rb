@@ -20,6 +20,7 @@ Department.create(id: 60, dname: 'OPERATIONS-S', loc:'SAN DIEGO')
 Department.create(id: 70, dname: 'OPERATIONS-W', loc:'SEATTLE')
 Department.create(id: 80, dname: 'OPERATIONS-E', loc:'MUNICH')
 Department.create(id: 90, dname: 'OPERATIONS-A', loc:'TOKIO')
+Department.create(id: 100, dname: 'G20', loc:'HMBURG')
 
 Employee.create(empno: 7839, ename: 'KING', job: 'PRESIDENT', mgr: nil, hiredate: '11-17-1981', sal: 5000, comm:  nil, department_id: 10 )
 Employee.create(empno: 7698, ename: 'BLAKE', job: 'MANAGER', mgr: 7839, hiredate: '05-01-1981', sal: 2850, comm:  nil, department_id: 30 )

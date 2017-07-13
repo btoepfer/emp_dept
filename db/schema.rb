@@ -12,13 +12,10 @@
 
 ActiveRecord::Schema.define(version: 20170126205610) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "departments", force: :cascade do |t|
     t.string "dname", limit: 14
     t.string "loc",   limit: 13
-    t.index ["dname"], name: "index_departments_on_dname", unique: true, using: :btree
+    t.index ["dname"], name: "index_departments_on_dname", unique: true
   end
 
   create_table "employees", force: :cascade do |t|
@@ -30,9 +27,8 @@ ActiveRecord::Schema.define(version: 20170126205610) do
     t.decimal "sal",                      precision: 7, scale: 2
     t.decimal "comm",                     precision: 7, scale: 2
     t.integer "department_id",                                    null: false
-    t.index ["department_id"], name: "index_employees_on_department_id", using: :btree
-    t.index ["empno"], name: "index_employees_on_empno", unique: true, using: :btree
+    t.index ["department_id"], name: "index_employees_on_department_id"
+    t.index ["empno"], name: "index_employees_on_empno", unique: true
   end
 
-  add_foreign_key "employees", "departments"
 end
