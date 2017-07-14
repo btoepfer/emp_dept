@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
 
   # GET /employees
   def index
-    @employees = @department.employees.all
+    @employees = @department.employees.all.order(:empno)
 
     render jsonapi: @employees
   end
