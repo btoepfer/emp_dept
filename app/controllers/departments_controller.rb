@@ -4,7 +4,7 @@ class DepartmentsController < ApplicationController
   # GET /departments
   def index
     # @departments = Department.includes(:employees).all
-    @departments = Department.all
+    @departments = Department.all.order(:dname)
     render jsonapi: @departments 
   end
 
@@ -46,6 +46,10 @@ class DepartmentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def department_params
-      params.fetch(:department, {})
+      parameter_hash = {}
+      #logger.debug("params: #{params.inspect}")
+      parameter_hash = ActiveModelSerializers::Deserialization.jsonapi_parse(params)
+      #logger.debug("parameter_hash: #{parameter_hash}")
+      return parameter_hash
     end
 end
