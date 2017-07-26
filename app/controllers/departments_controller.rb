@@ -18,6 +18,7 @@ class DepartmentsController < ApplicationController
     @department = Department.new(department_params)
 
     if @department.save
+      #logger.debug @department.inspect
       render jsonapi: @department, status: :created, location: @department
     else
       render jsonapi: @department.errors, status: :unprocessable_entity
