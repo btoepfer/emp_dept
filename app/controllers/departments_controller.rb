@@ -4,7 +4,14 @@ class DepartmentsController < ApplicationController
   # GET /departments
   def index
     # @departments = Department.includes(:employees).all
-    @departments = Department.all.order(:dname)
+    if params[:filter] == 'none' then
+      @departments = Department.all.order(:dname)
+    else
+      #employees = Employee.where("ename=?", params[:filter])
+      @departments = Department.left_outer_joins(:employees)
+                    .where("dname=? or ename=?", params[:filter], params[:filter])
+                    .order(:dname)
+    end
     render jsonapi: @departments 
   end
 
