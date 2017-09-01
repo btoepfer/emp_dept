@@ -54,15 +54,7 @@ class EmployeesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def employee_params
-      parameter_hash = {}
-      #logger.debug("params: #{params.inspect}")
-      parameter_hash = ActiveModelSerializers::Deserialization.jsonapi_parse(params)
-      #logger.debug("parameter_hash: #{parameter_hash}")
-      return parameter_hash
-
-
-      # params.require(:employee).permit(:empno, :ename, :job, :hiredate, :sal, :deptno)
-      # params.fetch(:employee, {})
+      ActiveModelSerializers::Deserialization.jsonapi_parse(params)
     end
 
 end

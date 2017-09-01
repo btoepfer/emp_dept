@@ -3,9 +3,6 @@ ActiveSupport.on_load(:action_controller) do
 end
 
 ActiveModel::Serializer.config.adapter = :json_api
-
-
-# Notwendig?
-#ActiveModelSerializers.config.key_transform = :unaltered
+ActiveModelSerializers.config.key_transform = :unaltered
 
 

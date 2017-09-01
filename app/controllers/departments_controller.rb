@@ -1,4 +1,5 @@
 class DepartmentsController < ApplicationController
+  before_action :authenticate_request!
   before_action :set_department, only: [:show, :update, :destroy]
 
   # GET /departments
@@ -52,10 +53,6 @@ class DepartmentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def department_params
-      parameter_hash = {}
-      #logger.debug("params: #{params.inspect}")
-      parameter_hash = ActiveModelSerializers::Deserialization.jsonapi_parse(params)
-      #logger.debug("parameter_hash: #{parameter_hash}")
-      return parameter_hash
+      ActiveModelSerializers::Deserialization.jsonapi_parse(params)
     end
 end
