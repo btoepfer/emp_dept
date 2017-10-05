@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  #before_action :set_user, only: [:show, :update, :destroy]
+  #before_action :set_user, only: [:logout]
 
   before_action :authenticate_request!, only: [:index, :logout, :show]
 
@@ -27,6 +27,8 @@ class UsersController < ApplicationController
     
     if user && user.authenticate(user_params[:password])
         auth_token = JsonWebToken.encode({user_id: user.id})
+        @current_user = user
+        login_user
         user.token = auth_token
         render jsonapi: user, status: :ok
     else
@@ -35,10 +37,24 @@ class UsersController < ApplicationController
   end
 
   def logout
+    logout_user
     render jsonapi: nil , status: :ok
   end
 
   private
+    def login_user
+      @current_user.last_sign_in_at = Time.now
+      @current_user.sign_in_count = @current_user.sign_in_count+1
+      @current_user.current_sign_in_at = Time.now
+      @current_user.save
+    end
+
+    def logout_user
+      @current_user.current_sign_in_at = nil
+      @current_user.save
+    end
+
+
     def set_user
       begin
         @user = User.find params[:id]

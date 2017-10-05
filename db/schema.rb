@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170823155300) do
+ActiveRecord::Schema.define(version: 20171004100006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20170823155300) do
     t.integer "department_id", null: false
     t.index ["department_id"], name: "index_employees_on_department_id"
     t.index ["empno"], name: "index_employees_on_empno", unique: true
+    t.index ["mgr"], name: "index_employees_on_mgr"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,4 +50,5 @@ ActiveRecord::Schema.define(version: 20170823155300) do
   end
 
   add_foreign_key "employees", "departments"
+  add_foreign_key "employees", "employees", column: "mgr", primary_key: "empno"
 end
