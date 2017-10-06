@@ -2,7 +2,7 @@ class EmployeeSerializer < ActiveModel::Serializer
   attributes :empno, :ename, :job, :hiredate, :sal, :mgr
   belongs_to :department
 
-  has_many :subordinates, include_data: true
+  has_many :subordinates
   
   
   belongs_to :manager
